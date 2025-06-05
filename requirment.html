@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RupeeBuddy - Choose Your Role</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="preload" href="indiafigure.jpg" as="image">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #0a1c3e, #1e3a8a);
+      color: #ffffff;
+      line-height: 1.6;
+      position: relative;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      padding: 10px 5%;
+      background: rgba(10, 28, 62, 0.95);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+    header .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    header .logo h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      color: #00ddeb;
+      letter-spacing: 1px;
+      margin-bottom: 3px;
+    }
+    header .logo .slogan {
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.8rem;
+      color: #b0d4ff;
+      font-weight: 300;
+    }
+    header .nav-container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    header nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    header nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    header nav ul li a:hover {
+      color: #FFD700;
+      transform: translateY(-2px);
+    }
+    .dashboard-btn {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #00ddeb, #00b7cc);
+      border: 2px solid #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 10px rgba(0, 221, 235, 0.5);
+      transition: transform 0.3s ease;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    .dashboard-btn:hover {
+      transform: scale(1.15) rotate(5deg);
+      box-shadow: 0 5px 15px rgba(0, 221, 235, 0.7);
+    }
+    .dashboard-btn svg {
+      width: 75%;
+      height: 75%;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 10px rgba(0, 221, 235, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(0, 221, 235, 0.8); }
+      100% { box-shadow: 0 0 10px rgba(0, 221, 235, 0.5); }
+    }
+    .hero {
+      text-align: center;
+      padding: 60px 5% 50px;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    .hero h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.6rem;
+      color: #00ddeb;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(0, 221, 235, 0.5);
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #b0d4ff;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+    .button-group {
+      display: flex;
+      gap: 25px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 14px 40px;
+      background: #00ddeb;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #0a1c3e;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 221, 235, 0.4);
+    }
+    .btn:hover {
+      background: #00b7cc;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 221, 235, 0.6);
+    }
+    .map-section {
+      padding: 80px 5%;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+    .map-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 3rem;
+      font-weight: 800;
+      color: #00ddeb;
+      margin-bottom: 50px;
+      text-shadow: 0 0 12px rgba(0, 221, 235, 0.6), 0 0 20px rgba(0, 221, 235, 0.4);
+      opacity: 0;
+      animation: fadeIn 1.5s forwards;
+      letter-spacing: 1.5px;
+    }
+    #map-canvas {
+      width: 100%;
+      height: 700px;
+      border-radius: 15px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.4));
+      overflow: hidden;
+    }
+    #india-map {
+      width: 95%;
+      height: auto;
+      max-width: 1200px;
+      border-radius: 12px;
+      border: 3px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 0 20px rgba(0, 221, 235, 0.5);
+      animation: glowBorder 2s infinite ease-in-out;
+      filter: brightness(115%) contrast(1.15);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+    #india-map:hover {
+      transform: scale(1.02);
+      filter: brightness(125%) contrast(1.2);
+    }
+    .review-popup {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.98);
+      color: #0a1c3e;
+      padding: 20px;
+      border-radius: 12px;
+      width: 250px;
+      text-align: left;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transform: translate(-50%, -120%) scale(0.8);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      z-index: 10;
+      font-family: 'Roboto', sans-serif;
+    }
+    .review-popup.active {
+      opacity: 1;
+      transform: translate(-50%, -120%) scale(1);
+    }
+    .review-popup .user {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .review-popup .user .avatar {
+      width: 35px;
+      height: 35px;
+      background: #00ddeb;
+      border-radius: 50%;
+      margin-right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0a1c3e;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .review-popup .user span {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #0a1c3e;
+    }
+    .review-popup p {
+      color: #333;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .info-section {
+      padding: 80px 5%;
+      background: rgba(0, 0, 0, 0.5);
+      text-align: center;
+    }
+    .info-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.1rem;
+      color: #00ddeb;
+      margin-bottom: 40px;
+      text-shadow: 0 0 8px rgba(0, 221, 235, 0.3);
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .info-card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 25px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 221, 235, 0.3);
+    }
+    .info-card p {
+      font-size: 1rem;
+      color: #b0d4ff;
+    }
+    footer {
+      padding: 30px 5%;
+      background: rgba(10, 28, 62, 0.95);
+      text-align: center;
+      box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.5);
+    }
+    footer p {
+      font-size: 0.9rem;
+      color: #b0d4ff;
+    }
+    footer .disclaimer {
+      font-size: 0.85rem;
+      color: #b0d4ff;
+      max-width: 800px;
+      margin: 10px auto 0;
+      line-height: 1.5;
+    }
+    footer .disclaimer span {
+      color: #00ddeb;
+      font-weight: 500;
+    }
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      justify-content: center;
+      align-items: center;
+    }
+    .popup-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+    }
+    .popup-overlay.active .popup-content {
+      transform: scale(1);
+    }
+    .popup-content h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      color: #1e3a8a;
+      font-family: 'Poppins', sans-serif;
+    }
+    .popup-content p {
+      font-size: 1rem;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    .popup-content input,
+    .popup-content textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-family: 'Poppins', sans-serif;
+    }
+    .popup-content button {
+      padding: 12px 30px;
+      background: linear-gradient(135deg, #3b82f6, #00ddeb);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-weight: 600;
+      font-family: 'Poppins', sans-serif;
+    }
+    .popup-content button:hover {
+      background: linear-gradient(135deg, #00ddeb, #3b82f6);
+    }
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: #00ddeb;
+      color: #1e3a8a;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+    .close-btn:hover {
+      background: #FFD700;
+    }
+    .popup-content .email {
+      color: #00ddeb;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .popup-content .email:hover {
+      text-decoration: underline;
+    }
+    @keyframes glowBorder {
+      0% { box-shadow: 0 0 20px rgba(0, 221, 235, 0.5), 0 0 30px rgba(0, 221, 235, 0.3); }
+      50% { box-shadow: 0 0 30px rgba(0, 221, 235, 0.8), 0 0 40px rgba(0, 221, 235, 0.5); }
+      100% { box-shadow: 0 0 20px rgba(0, 221, 235, 0.5), 0 0 30px rgba(0, 221, 235, 0.3); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    @media (max-width: 768px) {
+      .map-section h2 {
+        font-size: 2.2rem;
+        margin-bottom: 40px;
+      }
+      #map-canvas {
+        height: 500px;
+      }
+      #india-map {
+        width: 100%;
+        max-width: 600px;
+      }
+      .review-popup {
+        width: 200px;
+        padding: 15px;
+      }
+      .review-popup .user .avatar {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+      }
+      .review-popup .user span {
+        font-size: 0.9rem;
+      }
+      .review-popup p {
+        font-size: 0.8rem;
+      }
+      .dashboard-btn {
+        width: 35px;
+        height: 35px;
+      }
+      footer .disclaimer {
+        font-size: 0.8rem;
+        padding: 0 10px;
+      }
+      .popup-content {
+        width: 95%;
+        padding: 20px;
+      }
+      .popup-content h2 {
+        font-size: 1.6rem;
+      }
+      .popup-content p {
+        font-size: 0.9rem;
+      }
+      .popup-content button {
+        font-size: 1rem;
+      }
+      .close-btn {
+        width: 25px;
+        height: 25px;
+        font-size: 1rem;
+      }
+      header .logo h1 {
+        font-size: 1.6rem;
+      }
+      header .logo .slogan {
+        font-size: 0.7rem;
+      }
+      header nav ul li a {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>RupeeBuddy</h1>
+      <span class="slogan">Small Loan, Big Smile</span>
+    </div>
+    <div class="nav-container">
+      <nav>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a onclick="showContactPopup()">Support</a></li>
+        </ul>
+      </nav>
+      <button class="dashboard-btn" onclick="goToDashboard()" id="dashboardBtn">
+        <svg viewBox="0 0 50 50">
+          <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#00ddeb;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#00b7cc;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <circle cx="25" cy="25" r="24" fill="url(#grad)" stroke="#fff" stroke-width="1"/>
+          <text x="25" y="33" font-family="Poppins, sans-serif" font-size="16" font-weight="700" fill="#0a1c3e" text-anchor="middle" letter-spacing="1">RB</text>
+          <path d="M20 22 L23 18 L27 18 L30 22" fill="none" stroke="#0a1c3e" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="25" cy="25" r="20" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+  <section class="hero">
+    <h2>Choose Your Role</h2>
+    <p>Join India’s trusted financial network with RupeeBuddy as a lender or borrower.</p>
+    <div class="button-group">
+      <a href="give.html" class="btn">Give a Loan</a>
+      <a href="take.html" class="btn">Take a Loan</a>
+    </div>
+  </section>
+  <section class="map-section">
+    <h2>Customer Voices Across India</h2>
+    <div id="map-canvas">
+      <img id="india-map" src="indiafigure.jpg" alt="India Map" />
+    </div>
+  </section>
+  <section class="info-section">
+    <h2>Our Commitment to You</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <p>Loans comply with a strict legal framework with transparent terms.</p>
+      </div>
+      <div class="info-card">
+        <p>Fraud leads to immediate bans and legal action for user safety.</p>
+      </div>
+      <div class="info-card">
+        <p>Privacy ensured with encrypted, secure data management.</p>
+      </div>
+      <div class="info-card">
+        <p>24/7 support team available to address all queries.</p>
+      </div>
+      <div class="info-card">
+        <p>Financial security through thorough user verification.</p>
+      </div>
+      <div class="info-card">
+        <p>Clear display of rates, durations, and repayments for transparency.</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>"Secure your financial future with informed choices."</p>
+    <p class="disclaimer">
+      <span>Disclaimer:</span> RupeeBuddy is a trusted platform connecting lenders and borrowers across India with secure, transparent loan processes backed by robust verification and 24/7 support. Always exercise caution in financial transactions, verify terms, and ensure informed decisions to safeguard your financial well-being.
+    </p>
+  </footer>
+  <!-- Support Popup -->
+  <div class="popup-overlay" id="contactPopup">
+    <div class="popup-content">
+      <button class="close-btn" onclick="hideContactPopup()">×</button>
+      <h2>Contact Us</h2>
+      <p>Have a question? Our team at <strong>RupeeBuddy</strong> is here to help you 24/7.</p>
+      <form id="contactForm">
+        <input type="text" placeholder="Your Name" aria-label="Name" required />
+        <input type="email" placeholder="Your Email" aria-label="Email" required />
+        <textarea placeholder="Your Message" rows="5" aria-label="Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+      <p>Or email us at <a href="mailto:2k24.cs.1d.2413829@gmail.com" class="email">2k24.cs.1d.2413829@gmail.com</a>.</p>
+      <p>Thank you for choosing RupeeBuddy—your partner for <em>Small Loans, Big Smiles</em>!</p>
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const savedProfile = localStorage.getItem("selectedProfile");
+      const dashboardBtn = document.getElementById("dashboardBtn");
+      if (savedProfile) {
+        dashboardBtn.innerHTML = savedProfile;
+      }
+
+      const users = [
+        { city: "Delhi", x: 0, y: 150, review: { user: "Amit Kumar", text: "Quick loans saved my day!" } },
+        { city: "Mumbai", x: -100, y: -50, review: { user: "Riya Sharma", text: "Seamless lending experience!" } },
+        { city: "Bangalore", x: 30, y: -200, review: { user: "Vikram Singh", text: "Top support—resolved fast!" } },
+        { city: "Chennai", x: 80, y: -180, review: { user: "Priya Menon", text: "Transparent process!" } },
+        { city: "Kolkata", x: 120, y: 50, review: { user: "Rahul Das", text: "Fast and reliable platform!" } },
+        { city: "Hyderabad", x: 0, y: -100, review: { user: "Sneha Reddy", text: "Excellent customer care!" } },
+        { city: "Pune", x: -60, y: -70, review: { user: "Arjun Patil", text: "Easy loan process!" } },
+        { city: "Ahmedabad", x: -60, y: 20, review: { user: "Meera Shah", text: "Secure and efficient!" } },
+        { city: "Jaipur", x: -30, y: 80, review: { user: "Vikas Jain", text: "Great transparency!" } },
+        { city: "Lucknow", x: 30, y: 100, review: { user: "Anjali Singh", text: "Quick support response!" } },
+        { city: "Kanpur", x: 60, y: 100, review: { user: "Rakesh Yadav", text: "Highly recommended!" } },
+        { city: "Nagpur", x: 0, y: 0, review: { user: "Pooja Deshmukh", text: "Smooth borrowing!" } },
+        { city: "Indore", x: -30, y: 0, review: { user: "Suresh Patel", text: "Trustworthy tool!" } },
+        { city: "Patna", x: 90, y: 80, review: { user: "Neha Kumari", text: "Fast loan approval!" } },
+        { city: "Surat", x: -90, y: -20, review: { user: "Kunal Shah", text: "Excellent service!" } },
+        { city: "Bhopal", x: 0, y: 20, review: { user: "Manish Tiwari", text: "Very user-friendly!" } },
+        { city: "Vadodara", x: -60, y: -20, review: { user: "Nisha Patel", text: "Effortless application!" } },
+        { city: "Coimbatore", x: 50, y: -220, review: { user: "Karthik N.", text: "Super fast process!" } },
+        { city: "Visakhapatnam", x: 120, y: -80, review: { user: "Sai Krishna", text: "Reliable and secure!" } },
+        { city: "Guwahati", x: 150, y: 150, review: { user: "Anita Bora", text: "Great platform for loans!" } }
+      ];
+
+      const mapCanvas = document.getElementById('map-canvas');
+      let currentIndex = 0;
+
+      // Create popups
+      const popups = users.map((user) => {
+        const popup = document.createElement('div');
+        popup.className = 'review-popup';
+        popup.innerHTML = `
+          <div class="user">
+            <div class="avatar">${user.review.user[0]}</div>
+            <span>${user.review.user}, ${user.city}</span>
+          </div>
+          <p>${user.review.text}</p>
+        `;
+        mapCanvas.appendChild(popup);
+        return popup;
+      });
+
+      // Position popups
+      function updatePositions() {
+        users.forEach((user, index) => {
+          const popup = popups[index];
+          const mapRect = mapCanvas.getBoundingClientRect();
+          const x = (mapRect.width / 2) + user.x;
+          const y = (mapRect.height / 2) - user.y;
+          popup.style.left = `${x}px`;
+          popup.style.top = `${y - 20}px`;
+        });
+      }
+      window.addEventListener('resize', updatePositions);
+      updatePositions();
+
+      // Show one popup at a time
+      function showUser(index) {
+        popups.forEach((popup) => {
+          popup.classList.remove('active');
+        });
+
+        const popup = popups[index];
+        popup.classList.add('active');
+      }
+
+      // Cycle through popups
+      function cycleUsers() {
+        showUser(currentIndex);
+        currentIndex = (currentIndex + 1) % users.length;
+        setTimeout(cycleUsers, 2000);
+      }
+
+      // Start the cycle
+      cycleUsers();
+
+      // Hover effects for info cards
+      const infoCards = document.querySelectorAll('.info-card');
+      infoCards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+          card.style.background = 'rgba(255, 255, 255, 0.15)';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.background = 'rgba(255, 255, 255, 0.1)';
+        });
+      });
+    });
+
+    function goToDashboard() {
+      window.location.href = "dashboard.html";
+    }
+
+    function showContactPopup() {
+      const popup = document.getElementById('contactPopup');
+      popup.style.display = 'flex';
+      popup.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function hideContactPopup() {
+      const popup = document.getElementById('contactPopup');
+      popup.style.display = 'none';
+      popup.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Contact Form Validation
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.querySelector('#contactForm input[placeholder="Your Name"]').value;
+      const email = document.querySelector('#contactForm input[placeholder="Your Email"]').value;
+      const message = document.querySelector('#contactForm textarea').value;
+      if (name && email && message) {
+        alert('Thank you for your message! Our team will respond soon.');
+        hideContactPopup();
+      } else {
+        alert('Please fill out all fields.');
+      }
+    });
+  </script>
+</body>
+</html>

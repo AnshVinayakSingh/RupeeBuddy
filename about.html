@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RupeeBuddy - About Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f9fafb;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 5%;
+      background: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+    .logo h1 { font-size: 1.8rem; color: #1e3a8a; font-weight: 700; }
+    .logo p { font-size: 0.9rem; color: #666; }
+    nav ul {
+      list-style: none;
+      display: flex;
+    }
+    nav ul li { margin: 0 20px; }
+    nav ul li a {
+      color: #1e3a8a;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover { color: #3b82f6; }
+    .dashboard-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background-color: #1e3a8a;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease, transform 0.3s ease;
+      z-index: 1000;
+    }
+    .dashboard-btn:hover {
+      background-color: #3b82f6;
+      transform: scale(1.1);
+    }
+    .dashboard-btn svg {
+      width: 80%;
+      height: 80%;
+    }
+    .about-section {
+      padding: 80px 5%;
+      text-align: center;
+      background: url('https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+      position: relative;
+      color: #fff;
+    }
+    .about-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+    }
+    .about-section h1, .about-section p {
+      position: relative;
+      z-index: 1;
+    }
+    .about-section h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .about-section p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+    .mission-vision {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+      padding: 60px 5%;
+      background: #fff;
+    }
+    .mission, .vision {
+      background: #f9fafb;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      text-align: left;
+      position: relative;
+      border-left: 5px solid #3b82f6;
+      transition: transform 0.3s ease;
+    }
+    .mission:hover, .vision:hover {
+      transform: translateY(-5px);
+    }
+    .mission h2, .vision h2 {
+      font-size: 2rem;
+      color: #1e3a8a;
+      margin-bottom: 20px;
+    }
+    .mission p, .vision p {
+      font-size: 1.1rem;
+      color: #666;
+    }
+    .values-section {
+      padding: 60px 5%;
+      background: #fff;
+      text-align: center;
+    }
+    .values-section h2 {
+      font-size: 2.5rem;
+      color: #1e3a8a;
+      margin-bottom: 40px;
+    }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .value {
+      padding: 30px;
+      border-radius: 12px;
+      background: #f9fafb;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+    .value h3 {
+      font-size: 1.5rem;
+      color: #1e3a8a;
+      margin-bottom: 15px;
+    }
+    .value p {
+      font-size: 1rem;
+      color: #666;
+    }
+    footer {
+      background: #1e3a8a;
+      color: #fff;
+      padding: 40px 5%;
+      text-align: center;
+    }
+    footer p { font-size: 0.9rem; margin-bottom: 10px; }
+    footer .footer-links {
+      margin-top: 20px;
+    }
+    footer .footer-links a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 0.9rem;
+      transition: color 0.3s ease;
+    }
+    footer .footer-links a:hover {
+      color: #3b82f6;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>RupeeBuddy</h1>
+      <p>Small Loan, Big Smile</p>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="dashboard-btn" onclick="window.location.href='dashboard.html'" id="dashboardBtn">
+      <svg viewBox="0 0 40 40">
+        <circle cx="20" cy="20" r="20" fill="#1e3a8a"/>
+        <text x="20" y="24" font-size="14" fill="#fff" text-anchor="middle">RB</text>
+      </svg>
+    </button>
+  </header>
+  <section class="about-section">
+    <h1>About RupeeBuddy</h1>
+    <p>RupeeBuddy is more than just a loan platform—it’s a movement to empower individuals with financial freedom. Founded with a vision to make small loans accessible, secure, and transparent, we’ve built a trusted community where every user’s dream matters. Our innovative features, like instant disbursal and robust security, reflect our commitment to your success.</p>
+  </section>
+  <section class="mission-vision">
+    <div class="mission">
+      <h2>Our Mission</h2>
+      <p>To provide quick, secure, and affordable loans to every individual, ensuring financial inclusion with cutting-edge technology and a customer-first approach. We aim to simplify borrowing and empower lives, one loan at a time.</p>
+    </div>
+    <div class="vision">
+      <h2>Our Vision</h2>
+      <p>To create a world where financial barriers are broken, and every person has the opportunity to chase their dreams with confidence, supported by a reliable and innovative lending ecosystem.</p>
+    </div>
+  </section>
+  <section class="values-section">
+    <h2>Our Core Values</h2>
+    <div class="values-grid">
+      <div class="value">
+        <h3>Transparency</h3>
+        <p>We believe in clear, honest communication—no hidden fees, no surprises, just trust.</p>
+      </div>
+      <div class="value">
+        <h3>Security</h3>
+        <p>Your safety is our priority, with advanced measures like video KYC and geo-blocking.</p>
+      </div>
+      <div class="value">
+        <h3>Community</h3>
+        <p>We’re building a supportive network where every user feels valued and empowered.</p>
+      </div>
+      <div class="value">
+        <h3>Innovation</h3>
+        <p>Constantly evolving with technology to make lending faster, safer, and easier for you.</p>
+      </div>
+    </div>
+  </section>
+  <footer>
+    <p>© 2025 RupeeBuddy. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Support</a>
+    </div>
+  </footer>
+</body>
+</html>
